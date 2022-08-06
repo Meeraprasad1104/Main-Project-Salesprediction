@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Title Page-->
+    <title>Sales Prediction</title>
+
+    <!-- Icons font CSS-->
+    <link
+      href="static/vendor/mdi-font/css/material-design-iconic-font.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="static/vendor/font-awesome-4.7/css/font-awesome.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <!-- Font special for pages-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS-->
+    <link
+      href="static/vendor/select2/select2.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="static/vendor/datepicker/daterangepicker.css"
+      rel="stylesheet"
+      media="all"
+    />
+
+    <!-- Main CSS-->
+    <link href="static/css/main.css" rel="stylesheet" media="all" />
+    <style>
+      .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+      <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+          <div class="card-heading">
+            <h2 class="title">Sales Prediction</h2>
+          </div>
+
+          <div class="card-body" style="padding-bottom: 20px;">
+            <form action="/predict" method="post" id="up-form" method="POST">
+      
+
+              <div class="form-row m-b-55">
+                <div class="name">Item Details</div>
+                <div class="value">
+                  <div class="row row-refine">
+                    <div class="col-3">
+                      <div class="input-group-desc">
+                        <input
+                          class="input--style-5"
+                          type="text"
+                          name="visibility"
+                        />
+                        <label class="label--desc">Visibility</label>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="input-group-desc">
+                        <input
+                          class="input--style-5"
+                          type="text"
+                          name="mrp"
+                        />
+                        <label class="label--desc">MRP</label>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="input-group-desc">
+                        <input
+                          class="input--style-5"
+                          type="text"
+                          name="weight"
+                        />
+                        <label class="label--desc">Weight</label>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="input-group-desc">
+                        <input
+                          class="input--style-5"
+                          type="text"
+                          name="outlet_establishment_year"
+                        />
+                        <label class="label--desc">Est. Year</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="name">Item Fat content</div>
+                <div class="value">
+                  <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      <select name="item_fat_content">
+                        <option disabled="disabled" selected="selected">
+                          Choose option
+                        </option>
+                        <option value="0">Low Fat</option>
+                        <option value="1">Regular</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="name">Item Type</div>
+                <div class="value">
+                  <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      <select name="item_type">
+                        <option disabled="disabled" selected="selected">
+                          Choose option
+                        </option>
+                        <option value="0">Baking Goods</option>
+                        <option value="1">Breads</option>
+                        <option value="2">Breakfast</option>
+                        <option value="3">Canned</option>
+                        <option value="4">Dairy</option>
+                        <option value="5">Frozen Foods</option>
+                        <option value="6">Fruits and Vegetables</option>
+                        <option value="7">Hard Drinks</option>
+                        <option value="8">Health and Hygiene</option>
+                        <option value="9">Household</option>
+                        <option value="10">Meat</option>
+                        <option value="11">Others</option>
+                        <option value="12">Seafood</option>
+                        <option value="13">Snack Foods</option>
+                        <option value="14">Soft Drinks</option>
+                        <option value="15">Starchy Foods</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="name">Outlet Type</div>
+                <div class="value">
+                  <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      <select name="outlet_type">
+                        <option disabled="disabled" selected="selected">
+                          Choose option
+                        </option>
+                        <option value="0">Grocery Store</option>
+                        <option value="1">Supermarket Type1</option>
+                        <option value="2">Supermarket Type2</option>
+                        <option value="3">Supermarket Type3</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="name">Outlet Location Type</div>
+                <div class="value">
+                  <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      <select name="outlet_location_type">
+                        <option disabled="disabled" selected="selected">
+                          Choose option
+                        </option>
+                        <option value="0">Tier 1</option>
+                        <option value="1">Tier 2</option>
+                        <option value="2">Tier 3</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="name">Outlet Size</div>
+                <div class="value">
+                  <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      <select name="outlet_size">
+                        <option disabled="disabled" selected="selected">
+                          Choose option
+                        </option>
+                        <option value="0">High</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Small</option>
+                      </select>
+                      <div class="select-dropdown"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div></div>
+            </form>
+            <button
+              class="btn btn--radius-2 btn--red"
+              id="predict-btn"
+              type="submit"
+            >
+              Predict Now
+            </button>
+          </div>
+          <div id="loading"      style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding-bottom: 10px;
+        "><div class="loader"></div>
+        </div>
+          <div
+            id="result"
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              padding-bottom: 10px;
+            "
+          >
+        
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <script src="static/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="static/js/global.js"></script>
+
+    <script>
+      $("#loading").hide();
+      $("#predict-btn").click(() => {
+        console.log("Hit");
+        let form = $("#up-form")[0];        //form loaded in let form,no value is return so we canont use datatype
+        console.log(form);
+        let data = new FormData(form);       //formdata is a data from EXTRACTED data
+        console.log(data);            
+        $("#loading").show();
+      //print
+        $.ajax({
+          type: "POST",
+          url: "/predict",
+          data: data,         //these data is the above log file data
+          contentType: false,
+          cache: false,
+          processData: false,
+          async: true,
+          success: function (res) {     //the result is success function then we move to app.py page then reload and final answer stored in res variable
+            console.log(res);
+            $("#loading").hide();
+
+            var resContent =          //concatination used in th output all the predictions are displayed
+              "<h4>XGBoost:" +
+              res["pred"]["xgb"] +
+              "</h4><h4>Catboost:" +
+              res["pred"]["cat"] +
+              "</h4><h4>LightBGM:" +
+              res["pred"]["lbg"] +
+              "</h4>";
+            $("#result").html(resContent);
+            
+          },
+        });
+      });
+    </script>
+  </body>
+  <!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<!-- end document-->
